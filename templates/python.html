@@ -1,0 +1,25 @@
+{% extends 'layout.html'%}
+{% block title %}<title>{{params['blog_name']}} -{{post.title}} </title>{% endblock %}
+{% block meta %}{% endblock %}
+{% block body %}
+<div class="container mt-2">
+  <div class="row">
+    <div class="bg-white rounded shadow-lg col-md-9">
+        <h3 class="text-center mt-3">{{post.title}}</h3>
+        <h6 class="text-center">{{post.tagline}}</h6>
+        <span>{{post.content|safe}}</span>
+    </div>
+    <div class="col m-2">
+      <button type="button" name="button" class="btn btn-success" onclick="showContent()">Content List</button><br><br>
+      <span id="pythonContent"></span>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block script %}
+    <script>
+      function showContent() {
+        document.getElementById("pythonContent").innerHTML = "<h4>Content</h4> {% for all_post in posts %} <ul> <a href='/python/{{all_post.slug}}'><li>{{all_post.title}}</li></a> </ul> {% endfor %}"
+      }
+    </script>
+{% endblock %}

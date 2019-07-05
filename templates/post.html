@@ -1,0 +1,44 @@
+{% extends 'layout.html'%}
+{% block title %}<title>{{params['blog_name']}} -{{post.title}}</title>{% endblock %}
+{% block meta %}{% endblock %}
+{% block body %}
+<div class="container mt-2">
+<div class="row">
+  <div class=" p-3 bg-white col-lg-9">
+    <h3 class="text-center">{{post.title}}</h3>
+    <h6 class="text-center">{{post.tagline}}</h6>
+    <p class="font-italic" style="font-size:14px">{{post.date_time}}<br></p>
+    {{post.content|safe}}
+  </div>
+  <div class="my-3 p-3 mx-3 col">
+    <div class="fb-like mb-2"
+      data-href="https://www.codewords.com/{{post.slug}}"
+      data-width=""
+      data-layout="button_count"
+      data-action="like"
+      data-size="small"
+      data-show-faces="true"
+      data-share="true">
+    </div>
+    <h6>Recent Posts</h6><br>
+    {% for recent in posts %}
+    {% if post.slug != recent.slug %}
+    <a href="/post/{{recent.slug}}" style="text-decoration:none">
+      <div class="media text-muted">
+        <img src={{ url_for('static', filename='img/python-logo.png') }} alt="python-logo" width="31" height="38">
+          <p style="font-size:13px" class="media-body ml-2">
+            <strong >{{recent.title}}</strong><br>
+              {{recent.tagline}}
+          </p>
+      </div>
+      </a>
+      {% endif %}
+      {% endfor %}
+  </div>
+</div>
+
+<div class="fb-comments" data-href="http://127.0.0.1:5000/post/extraction-of-number" data-width="" data-numposts="5"></div>
+</div>
+{% endblock %}
+{% block script %}
+{% endblock %}

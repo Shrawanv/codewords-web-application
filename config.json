@@ -1,0 +1,21 @@
+{
+
+"params":
+{
+  "local_uri":"mysql://root:@localhost/codewords",
+  "production_uri":"mysql://username:password@localhost/codewords",
+  "fb_url":"https://facebook.com/",
+  "tw_url":"https://twitter.com/",
+  "gh_url":"https://github.com/",
+  "gmail-user":"Your Gmail Address",
+  "gmail-password":"your Gmail password",
+  "blog_name":"CodeWords",
+  "number_of_post":5,
+  "first_slug_python":1,
+  "login_image":"login.svg",
+  "admin_user":"codewords",
+  "admin_password":"1503096",
+  "upload_locaion":"C:\\Users\\Raj\\Desktop\\Codes\\Web Project\\CodeWords\\static\\img"
+}
+
+}

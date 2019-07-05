@@ -1,0 +1,114 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class="container my-3">
+
+     {% if key == "python" %}
+  <h1 class="text-center">Python Page Posts Edit/Delete</h1>
+  <a href="/admin"><button class="btn btn-primary mr-2">Dashboard Home</button></a>
+  <a href="/logout"><button type="button" name="logout" class="btn btn-danger float-right">Logout</button></a><br><br>
+  <a href="/admin/python_problems"><button type="button" name="contact" class="btn btn-primary ">Python Problems</button></a>
+  <a href="/admin/python/0"><button class="btn btn-primary">Add New Post</button></a>
+
+    {% elif key == "python_problems" %}
+  <h1 class="text-center">Problems Page Posts Edit/Delete</h1>
+  <a href="/admin"><button class="btn btn-primary mr-2">Dashboard Home</button></a>
+  <a href="/logout"><button type="button" name="logout" class="btn btn-danger float-right">Logout</button></a><br><br>
+  <a href="/admin/python"><button type="button" name="contact" class="btn btn-primary ">Python Posts</button></a>
+  <a href="/admin/python_problems/0"><button class="btn btn-primary">Add New Post</button></a>
+
+    {% elif key == "contacts" %}
+  <h1 class="text-center">Contacts</h1>
+  <a href="/admin"><button class="btn btn-primary mr-2">Dashboard Home</button></a>
+  <a href="/logout"><button type="button" name="logout" class="btn btn-danger float-right">Logout</button></a>
+    {% endif %}
+  <br>
+  <hr>
+  {% if (key == "python") %}
+    <h2>Upload Files</h2>
+    <form action="/uploader" method="post" enctype="multipart/form-data">
+      <input type="file" name="file_upload" >
+      <button type="submit" class="btn btn-info mt-1">Submit</button>
+    </form>
+      <table class="table">
+          <thead>
+            <tr>
+              <th>Sn</th>
+              <th>Title</th>
+              <!-- <th>Date</th> -->
+              <th>Edit/Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for post in posts %}
+            <tr>
+              <td>{{post.sno}}</td>
+              <td><a href="/admin/python/{{post.sno}}">{{post.title}}</a></td>
+              <!-- <td>{{post.date_time}}</td> -->
+              <td>
+                <a href="/admin/python/delete/{{post.sno}}"><button>Delete</button>
+              </td>
+
+            </tr>
+            {% endfor %}
+    </table>
+  {% endif %}
+
+  {% if (key == "python_problems") %}
+    <h2>Upload Files</h2>
+    <form action="/uploader" method="post" enctype="multipart/form-data">
+      <input type="file" name="file_upload" >
+      <button type="submit" class="btn btn-info mt-1">Submit</button>
+    </form>
+      <table class="table">
+          <thead>
+            <tr>
+              <th>Sn</th>
+              <th>Title</th>
+              <!-- <th>Date</th> -->
+              <th>Edit/Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for post in posts %}
+            <tr>
+              <td>{{post.sno}}</td>
+              <td><a href="/admin/python_problems/{{post.sno}}">{{post.title}}</a></td>
+              <!-- <td>{{post.date_time}}</td> -->
+              <td>
+                <a href="/admin/python_problems/delete/{{post.sno}}"><button>Delete</button>
+              </td>
+
+            </tr>
+            {% endfor %}
+    </table>
+  {% endif %}
+
+  {% if key == "contacts" %}
+  <table class="table">
+      <thead>
+        <tr>
+          <th>Sn</th>
+          <th>Name/Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for contact in contacts %}
+        <tr>
+          <td>{{contact.sno}}</td>
+
+          <td>
+            <a href="/admin/contact/{{contact.sno}}">
+            {{contact.name}}<br>
+            {{contact.email}}
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+  </table>
+
+  {% endif %}
+</div>
+
+{% endblock %}
