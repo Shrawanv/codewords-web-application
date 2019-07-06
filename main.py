@@ -38,7 +38,7 @@ class Contacts(db.Model):
     msg = db.Column(db.String(50), nullable=False)
     date_time = db.Column(db.String(11))
 
-class Python_problems(db.Model):
+class Blog(db.Model):
     sno = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(80), nullable=False)
     tagline = db.Column(db.String(80), nullable=False)
@@ -75,15 +75,15 @@ def admin_edit(something):
         if something == "python":
             posts = Python.query.all()
             return render_template('edit_dashboard.html', posts=posts, params=params, key="python")
-        elif something == "python_problems":
-            posts = Python_problems.query.all()
-            return render_template('edit_dashboard.html', posts=posts, params=params, key="python_problems")
+        elif something == "blog":
+            posts = Blog.query.all()
+            return render_template('edit_dashboard.html', posts=posts, params=params, key="blog")
         elif something == "contact":
             contacts = Contacts.query.all()
             return render_template('edit_dashboard.html', contacts=contacts, params=params, key="contacts")
     return render_template('login.html', params = params)
 
-@app.route("/admin/python_problems/<string:sno>", methods=["GET","POST"])
+@app.route("/admin/blog/<string:sno>", methods=["GET","POST"])
 def edit1(sno):
     if ('user' in session and session['user'] == params['admin_user']):
         if (request.method == 'POST'):
@@ -94,21 +94,21 @@ def edit1(sno):
             author = request.form.get('author')
 
             if sno == "0":
-                post = Python_problems(title=title, tagline=tagline, content=content, slug=slug, author=author, date_time=datetime.now())
+                post = Blog(title=title, tagline=tagline, content=content, slug=slug, author=author, date_time=datetime.now())
                 db.session.add(post)
                 db.session.commit()
             else:
-                post = Python_problems.query.filter_by(sno=sno).first()
+                post = blog.query.filter_by(sno=sno).first()
                 post.title = title
                 post.tagline = tagline
                 post.content = content
                 post.slug = slug
                 post.author = author
                 db.session.commit()
-                return redirect('/admin/python_problems/'+ sno)
+                return redirect('/admin/blog/'+ sno)
 
-        post = Python_problems.query.filter_by(sno=sno).first()
-        return render_template('edit.html', params=params, post=post, key="python_problems")
+        post = Blog.query.filter_by(sno=sno).first()
+        return render_template('edit.html', params=params, post=post, key="blog")
     return render_template('login.html', params=params)
 
 @app.route("/admin/python/<string:sno>", methods=["GET","POST"])
@@ -149,13 +149,13 @@ def contact_details(sno):
 
 @app.route("/")
 def home():
-    posts = Python_problems.query.filter_by().all()[0:params['number_of_post']]
+    posts = Blog.query.filter_by().all()[0:params['number_of_post']]
     return render_template("index.html", params=params, posts=posts,)
 
-@app.route("/practice_problems")
-def python_problems():
-    posts = Python_problems.query.filter_by().all()
-    return render_template("python_problems.html", params=params, posts=posts)
+@app.route("/blog")
+def blog():
+    posts = Blog.query.filter_by().all()
+    return render_template("blog.html", params=params, posts=posts)
 
 @app.route("/python/<string:post_slug>")
 def python(post_slug):
@@ -177,10 +177,10 @@ def contact():
         mail.send_message('New message from ' + name,sender= email, recipients= [params['gmail-user']],body= message + '\n'+ phone )
     return render_template("contact.html", params=params)
 
-@app.route("/python_problems/<string:post_slug>", methods=["GET"])
+@app.route("/blog/<string:post_slug>", methods=["GET"])
 def post_page(post_slug):
-    post = Python_problems.query.filter_by(slug=post_slug).first()
-    posts = Python_problems.query.filter_by().all()[0:11]
+    post = Blog.query.filter_by(slug=post_slug).first()
+    posts = Blog.query.filter_by().all()[0:11]
     return render_template("post.html", params=params, post=post, posts=posts)
 
 
@@ -192,13 +192,13 @@ def delete_python(sno):
         db.session.commit()
         return redirect('/admin/python')
 
-@app.route("/admin/python_problems/delete/<string:sno>", methods=["GET","POST"])
-def delete_python_problems(sno):
+@app.route("/admin/blog/delete/<string:sno>", methods=["GET","POST"])
+def delete_blog(sno):
     if ('user' in session and session['user'] == params['admin_user']):
-        post = Python_problems.query.filter_by(sno=sno).first()
+        post = Blog.query.filter_by(sno=sno).first()
         db.session.delete(post)
         db.session.commit()
-        return redirect('/admin/python_problems')
+        return redirect('/admin/blog')
 
 @app.route("/admin/contact/delete/<string:sno>", methods=["GET","POST"])
 def delete_contact(sno):
@@ -224,4 +224,4 @@ def uploader():
 
 
 
-app.run(debug=False)
+app.run(debug=True)

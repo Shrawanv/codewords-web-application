@@ -1,6 +1,9 @@
 {% extends 'layout.html'%}
 {% block title %}<title>{{params['blog_name']}} -{{post.title}}</title>{% endblock %}
-{% block meta %}{% endblock %}
+{% block head %}
+
+
+{% endblock %}
 {% block body %}
 <div class="container mt-2">
 <div class="row">
@@ -23,7 +26,7 @@
     <h6>Recent Posts</h6><br>
     {% for recent in posts %}
     {% if post.slug != recent.slug %}
-    <a href="/post/{{recent.slug}}" style="text-decoration:none">
+    <a href="/blog/{{recent.slug}}" style="text-decoration:none">
       <div class="media text-muted">
         <img src={{ url_for('static', filename='img/python-logo.png') }} alt="python-logo" width="31" height="38">
           <p style="font-size:13px" class="media-body ml-2">

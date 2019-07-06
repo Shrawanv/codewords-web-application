@@ -1,6 +1,6 @@
 {% extends 'layout.html'%}
 {% block title %}<title>{{params['blog_name']}} - Home</title>{% endblock %}
-{% block meta %}{% endblock %}
+{% block head %}{% endblock %}
 
 {% block body %}
 <div class="container">
@@ -8,7 +8,7 @@
 <div class="my-3 mx-3 p-3 bg-white rounded shadow-lg col-md-9">
 <h6 class="border-bottom border-gray pb-2 mb-0">Recent updates</h6>
 {% for post in posts %}
-<a href="/python_problems/{{post.slug}}" style="text-decoration:none">
+<a href="/blog/{{post.slug}}" style="text-decoration:none">
   <div class="media text-muted pt-3">
     <img src={{ url_for('static', filename='img/python-logo.png') }} alt="python-logo" width="40" height="45">
       <p class="media-body pb-3 mb-0 ml-2 small lh-125 border-bottom border-gray">
@@ -19,7 +19,7 @@
     </a>
     {% endfor %}
     <small class="d-block text-right mt-3">
-      <a href="/practice_problems">All posts</a>
+      <a href="/blog">All posts</a>
     </small>
   </div>
   <div class="my-3 p-3 col">
