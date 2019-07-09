@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=9" />
+	<title>Error 404</title>
+	<link href="https://fonts.googleapis.com/css?family=Pacifico|Satisfy&display=swap" rel="stylesheet">
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			background-color: #e6e6e6;
+			padding: 3% ;
+
+		}
+
+		.container {
+			text-align: center;
+
+		}
+
+		.center {
+			display: inline-block;
+			background-color: white;
+			padding: 50px 100px 80px;
+			border-radius: 10px;
+			animation: myMove 3s infinite;
+		}
+
+		.center h1 {
+			font-size: 200px;
+			font-family: cursive;
+			padding:0 ;
+		}
+
+		.center p {
+			font-size: 40px;
+			font-family: Satisfy;
+		}
+
+		.button {
+			background-color: #e6e6e6; /*Green */
+			color: #4CAF50;
+			border: none;
+			padding: 15px 32px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: 4px 2px;
+			cursor: pointer;
+			border-radius: 4em;
+			outline: 0;
+			-webkit-border-radius: 4em;
+    		-moz-border-radius: 4em;
+		}
+
+		.button:hover {
+			background-color: #4CAF50;
+			color: white;
+		}
+
+		/* added for Firefox compatability */
+		button::-moz-focus-inner, a::-moz-focus-inner { border:0; }
+
+		@keyframes myMove {
+			50% {box-shadow: 5px 15px 30px #888888}
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="center">
+			<h1>404</h1>
+			<p>Ooops the page you are looking for may not exists !</p>
+			<a href="/"><button class="button">Look around CodeWords.com</button></a>
+		</div>
+	</div>
+</body>
+</html>

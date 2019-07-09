@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, session, redirect
 from flask_sqlalchemy import SQLAlchemy
+from datetime import date
 from datetime import datetime
 from flask_mail import Mail
 import os
@@ -94,7 +95,7 @@ def edit1(sno):
             author = request.form.get('author')
 
             if sno == "0":
-                post = Blog(title=title, tagline=tagline, content=content, slug=slug, author=author, date_time=datetime.now())
+                post = Blog(title=title, tagline=tagline, content=content, slug=slug, author=author, date_time=date.today())
                 db.session.add(post)
                 db.session.commit()
             else:
@@ -122,7 +123,7 @@ def edit2(sno):
             author = request.form.get('author')
 
             if sno == '0':
-                post = Python(title=title, tagline=tagline, content=content, slug=slug, author=author, date_time=datetime.now())
+                post = Python(title=title, tagline=tagline, content=content, slug=slug, author=author, date_time=date.today())
                 db.session.add(post)
                 db.session.commit()
 
@@ -174,7 +175,7 @@ def contact():
         entry = Contacts(name=name, phone= phone, email = email, msg= message, date_time= datetime.now())
         db.session.add(entry)
         db.session.commit()
-        mail.send_message('New message from ' + name,sender= email, recipients= [params['gmail-user']],body= message + '\n'+ phone )
+        mail.send_message('New message from ' + name,sender= email, recipients= [params['gmail-user']],body= 'Name: '+ name + '\n'+ 'Email: ' + email + '\n' + 'Phone: ' + phone + '\n' + 'Message: ' + message  )
     return render_template("contact.html", params=params)
 
 @app.route("/blog/<string:post_slug>", methods=["GET"])
@@ -222,6 +223,9 @@ def uploader():
             return "Uploaded Successfully"
     return render_template('login.html', params = params)
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
 
 
 app.run(debug=True)

@@ -28,5 +28,4 @@ CKEDITOR.editorConfig = function( config ) {
 		config.extraPlugins = 'youtube,font,codesnippet';
 		config.skin = 'office2013';
 		// config.extraPlugins = ;
-		config.codeSnippet_theme = 'school_book';
 };
