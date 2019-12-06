@@ -1,2 +1,2 @@
 # codewords
-My Fisrt ever complete project using Flask Python
+My First ever complete project using Flask Python
