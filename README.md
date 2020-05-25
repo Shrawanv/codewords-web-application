@@ -1,2 +1,3 @@
 # codewords
-My First ever complete project using Flask Python
+
+Codewords is a web application made using python framework named Flask.
