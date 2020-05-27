@@ -6,7 +6,7 @@ from flask_mail import Mail
 import os
 import json
 from jinja2 import Markup, escape
-from werkzeug import secure_filename
+# from werkzeug import secure_filename
 from wtforms import Form, StringField, SelectField
 
 # Reading data from the config.jason file
